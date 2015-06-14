@@ -25,7 +25,7 @@ Repoducible Research Peer Assignment 1
 # 2. What is mean total number of steps taken per day?
 
 
-```{r} 
+```{r, f.height = 4} 
 
 ##summarize by date and take mean step count
         step <- data %>%  group_by(date) %>% summarize(sum(steps, na.rm = TRUE))
@@ -42,7 +42,7 @@ Repoducible Research Peer Assignment 1
 # 3. What is the average daily activity pattern?
 
 
-```{r}
+```{r, f.height = 4}
 ## Create a new tidy data frame
         steppat <- step <- data %>%  group_by(interval) %>% summarize(mean(steps, na.rm = TRUE))
 
@@ -57,7 +57,7 @@ Repoducible Research Peer Assignment 1
 # 4. Imputing missing values
 
 
-```{r}
+```{r, f.height = 4}
 ## count of rows with missing values
         miss <- data[is.na(data),]
         n <- nrow(miss)
@@ -69,6 +69,7 @@ Repoducible Research Peer Assignment 1
         
 ##sum of steps per day and histogram of the new data set
         step_imp <- data_imp %>%  group_by(date) %>% summarize(sum(steps, na.rm = TRUE))
+        par(mfrow = c(1,1))
         hist(step_imp$sum, main = "Total steps per day", xlab = "Total steps")  ##Plot the total steps in histogram
         
 ##summary stats of the new data set
@@ -84,7 +85,7 @@ Repoducible Research Peer Assignment 1
 # 5. Are there differences in activity patterns between weekdays and weekends?
 
 
-``` {r}
+``` {r, f.height = 4}
 ## determine the weekdays
         data_imp$date <- ymd(data_imp$date)
         data_wkd <- data_imp %>%  mutate(weekday = weekdays(date)) %>% 
